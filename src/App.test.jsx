@@ -1,6 +1,10 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { describe, it, expect, afterEach } from 'vitest';
 import App from './App';
+
+afterEach(() => {
+  cleanup();
+});
 
 describe('Calculator Integration Tests', () => {
   it('simulates a full user interaction for addition', () => {
