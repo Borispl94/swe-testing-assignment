@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { add, subtract, multiply, divide } from './calculatorLogic';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [display, setDisplay] = useState('0');
+  const [prev, setPrev] = useState(null);
+  const [op, setOp] = useState(null);
+
+  const handleNum = (n) => setDisplay(display === '0' || display === 'Error' ? String(n) : display + n);
+  
+  const handleOp = (operator) => {
+    setPrev(parseFloat(display));
+    setOp(operator);
+    setDisplay('0');
+  };
+
+  const calculate = () => {
+    if (op === null || prev === null) return;
+    const curr = parseFloat(display);
+    let res = 0;
+    if (op === '+') res = add(prev, curr);
+    if (op === '-') res = subtract(prev, curr);
+    if (op === '*') res = multiply(prev, curr);
+    if (op === '/') res = divide(prev, curr);
+    setDisplay(String(res));
+    setOp(null);
+    setPrev(null);
+  };
+
+  const clear = () => {
+    setDisplay('0');
+    setOp(null);
+    setPrev(null);
+  };
 
   return (
-    <>
+    <div>
+      <h1>Quick-Calc</h1>
+      <div data-testid="display">{display}</div>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <button onClick={() => handleNum(1)}>1</button>
+        <button onClick={() => handleNum(2)}>2</button>
+        <button onClick={() => handleNum(3)}>3</button>
+        <button onClick={() => handleNum(5)}>5</button>
+        <button onClick={clear}>C</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div>
+        <button onClick={() => handleOp('+')}>+</button>
+        <button onClick={calculate}>=</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
-
-export default App
+export default App;
