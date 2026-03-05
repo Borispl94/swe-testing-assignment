@@ -41,11 +41,20 @@ function App() {
         <button onClick={() => handleNum(1)}>1</button>
         <button onClick={() => handleNum(2)}>2</button>
         <button onClick={() => handleNum(3)}>3</button>
+        <button onClick={() => handleNum(4)}>4</button>
         <button onClick={() => handleNum(5)}>5</button>
+        <button onClick={() => handleNum(6)}>6</button>
+        <button onClick={() => handleNum(7)}>7</button>
+        <button onClick={() => handleNum(8)}>8</button>
+        <button onClick={() => handleNum(9)}>9</button>
+        <button onClick={() => handleNum(0)}>0</button>
         <button onClick={clear}>C</button>
       </div>
       <div>
         <button onClick={() => handleOp('+')}>+</button>
+        <button onClick={() => handleOp('-')}>-</button>
+        <button onClick={() => handleOp('*')}>*</button>
+        <button onClick={() => handleOp('/')}>/</button>
         <button onClick={calculate}>=</button>
       </div>
     </div>
